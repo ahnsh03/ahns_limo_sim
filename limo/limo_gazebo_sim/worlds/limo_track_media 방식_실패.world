@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="default">
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <model name="limo_track_ground">
+      <static>true</static> <link name="link">
+
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal> <size>100 100</size> </plane>
+          </geometry>
+        </collision>
+
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>8 5.803</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>package://limo_gazebo_sim/media/materials/scripts/limo_track.material</uri>
+              <name>LimoTrack/Ground</name> </script>
+          </material>
+        </visual>
+
+      </link>
+    </model>
+
+    <physics type='ode'>
+      <max_step_size>0.01</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>100</real_time_update_rate>
+      <gravity>0 0 -9.8</gravity>
+    </physics>
+
+  </world>
+</sdf>

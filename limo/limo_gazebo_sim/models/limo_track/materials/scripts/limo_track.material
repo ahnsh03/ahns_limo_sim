@@ -1,0 +1,19 @@
+material LimoTrack/Ground
+{
+  technique
+  {
+    pass
+    {
+      ambient 1 1 1 1
+      diffuse 1 1 1 1
+      specular 0 0 0 1
+      emissive 0 0 0 1
+
+      texture_unit
+      {
+        texture processed_limo_track.png
+        filtering none none none 
+      }
+    }
+  }
+}
