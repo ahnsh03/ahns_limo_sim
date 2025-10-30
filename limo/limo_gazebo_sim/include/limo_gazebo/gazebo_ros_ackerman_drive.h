@@ -83,7 +83,7 @@ private:
 
     static constexpr double max_steer_angle_central = 0.523598767; // ~= 30
     static constexpr double track_ = 0.172;   // m (left right wheel distance)
-    static constexpr double wheelbase_ = 0.2; // m (front rear wheel distance)
+    static constexpr double wheelbase_ = 0.222; // m (front rear wheel distance)
 
     // Custom Callback Queue
     ros::CallbackQueue queue_;

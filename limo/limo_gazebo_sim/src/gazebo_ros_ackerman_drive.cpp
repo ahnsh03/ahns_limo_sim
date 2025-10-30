@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <assert.h>
 
-#include <limo_gazebo/gazebo_ros_ackerman_drive.h>
+#include "limo_gazebo/gazebo_ros_ackerman_drive.h"
 
 #include <ignition/math/Pose3.hh>
 #include <ignition/math/Vector3.hh>
@@ -373,9 +373,10 @@ void GazeboRosAckermanDrive::GetWheelVelocities() {
     }
     sig = steer_cmd < 0 ? -1 : 1;
     ConvertCentralAngleToLeftRight(steer_cmd, r,last_motor_cmd[1].data, last_motor_cmd[0].data);
-    if (fabs(steer_cmd) > 0){
-        left_side_velocity = vr - sig * vr / r * track_ * 0.2;
-        right_side_velocity = vr + sig * vr / r * track_ * 0.2;
+    if (fabs(steer_cmd) > 0.001) {
+    double R = wheelbase_ / rot_;
+    left_side_velocity = vr * (1 - (track_ / (2 * R)));
+    right_side_velocity = vr * (1 + (track_ / (2 * R)));
     }
     if(vr != 0.0) {
         wheel_speed_[RIGHT_FRONT] = right_side_velocity / fabs(std::cos(last_motor_cmd[0].data));
@@ -462,9 +463,9 @@ void GazeboRosAckermanDrive::PublishOdometry(double step_time) {
     odom_.pose.pose.orientation.w = pose.Rot().W();
     odom_.pose.covariance[0] = this->covariance_x_;
     odom_.pose.covariance[7] = this->covariance_y_;
-    odom_.pose.covariance[14] = 1000000000000.0;
-    odom_.pose.covariance[21] = 1000000000000.0;
-    odom_.pose.covariance[28] = 1000000000000.0;
+    odom_.pose.covariance[14] = 1000.0;
+    odom_.pose.covariance[21] = 1000.0;
+    odom_.pose.covariance[28] = 1000.0;
     odom_.pose.covariance[35] = this->covariance_yaw_;
 
     // get velocity in /odom frame
@@ -483,9 +484,9 @@ void GazeboRosAckermanDrive::PublishOdometry(double step_time) {
     odom_.twist.twist.linear.y = cosf(yaw) * linear.Y() - sinf(yaw) * linear.X();
     odom_.twist.covariance[0] = this->covariance_x_;
     odom_.twist.covariance[7] = this->covariance_y_;
-    odom_.twist.covariance[14] = 1000000000000.0;
-    odom_.twist.covariance[21] = 1000000000000.0;
-    odom_.twist.covariance[28] = 1000000000000.0;
+    odom_.twist.covariance[14] = 1000.0;
+    odom_.twist.covariance[21] = 1000.0;
+    odom_.twist.covariance[28] = 1000.0;
     odom_.twist.covariance[35] = this->covariance_yaw_;
 
     odom_.header.stamp = current_time;

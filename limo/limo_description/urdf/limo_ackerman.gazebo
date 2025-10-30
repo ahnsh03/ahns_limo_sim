@@ -15,12 +15,12 @@
     <xacro:gazebo_imu frame_prefix="imu" />
 
     <gazebo>
-        <mu1 value="10"/>
-        <mu2 value="10"/>
-        <kp value="10000000.0" />
-        <kd value="1.0" />
+        <mu1 value="1.0"/>
+        <mu2 value="1.0"/>
+        <kp value="100000.0" />
+        <kd value="10.0" />
         <fdir1 value="1 0 0"/>
-        <minDepth value="0.001" />
+        <minDepth value="0.005" />
         <maxContacts value="64"/>
     </gazebo>
 
