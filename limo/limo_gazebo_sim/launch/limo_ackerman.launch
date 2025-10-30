@@ -52,8 +52,7 @@
     <!-- RViz 실행 (선택적) -->
     <group if="$(arg rviz)">
         <node name="rviz" pkg="rviz" type="rviz" 
-              args="-d $(find limo_description)/rviz/model_display.rviz" 
-              launch-prefix="bash -c 'sleep 5; $0 $@'"/>
+              args="-d $(find limo_description)/rviz/model_display.rviz"/>
     </group>
 
 </launch>
