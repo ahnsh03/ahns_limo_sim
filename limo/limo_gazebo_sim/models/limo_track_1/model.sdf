@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
-  <model name="limo_track"> 
+  <model name="limo_track_1"> 
     <static>true</static>
     <link name="link">
       <collision name="collision">
@@ -19,9 +19,9 @@
         </geometry>
         <material>
           <script>
-            <uri>model://limo_track/materials/scripts</uri>
-            <uri>model://limo_track/materials/textures</uri>
-            <name>LimoTrack/Ground</name> </script>
+            <uri>model://limo_track_1/materials/scripts</uri>
+            <uri>model://limo_track_1/materials/textures</uri>
+            <name>LimoTrack1/Ground</name> </script>
         </material>
       </visual>
     </link>

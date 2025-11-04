@@ -6,7 +6,7 @@
     </include>
 
     <include>
-      <uri>model://limo_track_base</uri>
+      <uri>model://limo_track_mono</uri>
     </include>
 
     <physics type='ode'>

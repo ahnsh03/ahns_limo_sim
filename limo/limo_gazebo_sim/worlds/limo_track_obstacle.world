@@ -6,7 +6,7 @@
     </include>
 
     <include>
-      <uri>model://limo_track</uri>
+      <uri>model://limo_track_base</uri>
     </include>
 
     <model name="wall_1">
