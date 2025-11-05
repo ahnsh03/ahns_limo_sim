@@ -1,67 +1,194 @@
-# AgileX Product Gazebo Simulate
+[TOC]
 
+# Limo Simulation Operation Process
 
-
-## Install the Gazebo software
-
-Gazebo is  a simulator. Gazebo simulates multiple robots in a 3D environment, with extensive dynamic interaction between objects.
-
-[http://gazebosim.org](http://gazebosim.org/)
-
-Download and install gazebo you can go to the website :http://gazebosim.org/install
-
-------
-
-
-
-## Current support Gazebo simulation product list
-
-| Product name      | support status | Link                                                         |
-| :---------------- | -------------- | ------------------------------------------------------------ |
-| SCOUT 1.0×        | ×              |                                                              |
-| HUNTER 1.0        | ×              |                                                              |
-| SCOUT 2.0         | √              | [Scout Series ](https://github.com/agilexrobotics/ugv_gazebo_sim/tree/master/scout) |
-| HUNTER 2.0        | √              | [Hunter 2.0](https://github.com/agilexrobotics/ugv_gazebo_sim/tree/master/hunter) |
-| HUNTER SE         | √              | [HUNTER SE](https://github.com/agilexrobotics/ugv_gazebo_sim/tree/master/hunter_se) |
-| SCOUT MINI        | √              | [Scout Series ](https://github.com/agilexrobotics/ugv_gazebo_sim/tree/master/scout) |
-| SCOUT MINI(OMNI)  | ×              |                                                              |
-| TRACER            | √              | [Tracer](https://github.com/agilexrobotics/ugv_gazebo_sim/tree/master/tracer) |
-| TRACER MINI MODLE | √              | [TRACER MINI MODLE](https://github.com/agilexrobotics/ugv_gazebo_sim/tree/master/tracer_mini) |
-| BUNKER            | √              | [BUNKER](https://github.com/agilexrobotics/ugv_gazebo_sim/tree/master/bunker) |
-| BUNKER MINI       | ×              |                                                              |
-| BUNKER PRO        | ×              |                                                              |
-| AUTOKI MODLE      | √              | [AUTOKI](https://github.com/agilexrobotics/ugv_gazebo_sim/tree/master/autokit) |
-| RANGER MINI V1    | √              | [Ranger Mni Series](https://github.com/agilexrobotics/ugv_gazebo_sim/tree/master/ranger_mini) |
-| RANGER MINI V2    | √              | [Ranger Mni Series](https://github.com/agilexrobotics/ugv_gazebo_sim/tree/master/ranger_mini) |
-| RANGER MINI V3    | √              | [Ranger Mni Series](https://github.com/agilexrobotics/ugv_gazebo_sim/tree/master/ranger_mini) |
-| LIMO              | √              | [Limo](https://github.com/agilexrobotics/ugv_gazebo_sim/tree/master/limo) |
-| LIMO COBOT        | √              | [LIMO COBOT](https://github.com/agilexrobotics/limo_cobot_sim) |
-| SCOUT COBOT KIT   | √              | [SCOUT COBOT KIT](https://github.com/agilexrobotics/scout_cobot_sim) |
-| COBOT S KIT       | √              | [COBOT S KIT](https://github.com/agilexrobotics/cobot_s_sim) |
-
-
-
-## About usage
-
-1) clone the current repositories to your own workspace
-2) Go to you use product
-3) Each independent chassis product has its own independent instructions in the corresponding file directory
-
-### Ranger mini v2 & Ranger mini v3
-
-Because some models are too large to be uploaded to github, they are compressed and need to be extracted after downloading
-
-Ranger mini v2
-
-``` bash
-cd ranger_mini/ranger_mini_v2/meshes/
-unzip ranger_base.zip
-```
-
-Ranger mini v3
+## 1.	Introduction of Function Package
 
 ```
-cd ranger_mini/ranger_mini_v3/meshes/
-unzip ranger_base.zip
+├── image
+├── limo_description
+├── limo_gazebo_sim
 ```
 
+​	limo_description: The file is the function package of model file
+
+​	limo_gazebo_sim: The folder is gazebo simulation function package
+
+## 2.	Environment
+
+### Development Environment
+
+​	ubuntu 18.04 + [ROS Melodic desktop full](http://wiki.ros.org/melodic/Installation/Ubuntu)
+
+### Download and install required function package
+
+​	Download and install ros-control function package, ros-control is the robot control middleware provided by ROS
+
+```
+sudo apt-get install ros-melodic-ros-control
+```
+
+​	Download and install ros-controllers function package, ros-controllers are the kinematics plug-in of common models provided by ROS
+
+```
+sudo apt-get install ros-melodic-ros-controllers
+```
+
+​	Download and install gazebo-ros function package, gazebo-ros is the communication interface between gazebo and ROS, and connect the ROS and Gazebo
+
+```
+sudo apt-get install ros-melodic-gazebo-ros
+```
+
+​	Download and install gazebo-ros-control function package, gazebo-ros-control is the communication standard controller between ROS and Gazebo
+
+```
+sudo apt-get install ros-melodic-gazebo-ros-control
+```
+
+​	Download and install joint-state-publisher-gui package.This package is used to visualize the joint control.
+
+```
+sudo apt-get install ros-melodic-joint-state-publisher-gui 
+```
+
+​	Download and install rqt-robot-steering plug-in, rqt_robot_steering is a ROS tool closely related to robot motion control, it can send the control command of robot linear motion and steering motion, and the robot motion can be easily controlled through the sliding bar
+
+```
+sudo apt-get install ros-melodic-rqt-robot-steering 
+```
+
+​	Download and install teleop-twist-keyboard function package, telop-twist-keyboard is keyboard control function package, the robot can be controlled to move forward, left, right and backward through "i", "j", "l",and "," on the keyboard
+
+```
+sudo apt-get install ros-melodic-teleop-twist-keyboard 
+```
+
+
+
+## 3.	About Usage
+
+### 1.	Create workspace, download simulation model function package and compile
+
+​		Open a new terminal and create a workspace named limo_ws, enter in the terminal:
+
+```
+mkdir limo_ws
+```
+
+​		Enter the limo_ws folder
+
+```
+cd limo_ws
+```
+
+​		Create a folder to store function package named src
+```
+mkdir src
+```
+
+​		Enter the src folder
+
+```
+cd src
+```
+
+​		Initialize folder
+
+```
+catkin_init_workspace
+```
+
+​		Download simulation model function package
+
+```
+git clone https://github.com/agilexrobotics/ugv_sim.git
+```
+
+​		Enter the limo_ws folder
+
+```
+cd limo_ws
+```
+
+​		Confirm whether the dependency of the function package is installed
+
+```
+rosdep install --from-paths src --ignore-src -r -y 
+```
+
+​	Compile
+
+```
+catkin_make
+```
+
+
+
+### 2.	Run the star file of limo model and visualize the urdf file in Rviz
+
+​	Enter the limo_ws folder
+
+```
+cd limo_ws
+```
+
+​	Declare the environment variable
+
+```
+source devel/setup.bash
+```
+
+​	Run the start file of limo and visualize the model in Rviz
+
+```
+roslaunch limo_description display_models.launch 
+```
+
+![img](image/rviz.png) 
+
+### 3.	Start the gazebo simulation environment of limo and control limo movement in the gazebo
+
+​	Enter the limo_ws folder
+
+```
+cd limo_ws
+```
+
+​	Declare the environment variable
+
+```
+source devel/setup.bash
+```
+
+​	Start the simulation environment of limo, limo have two movement mode, the movement mode is Ackerman mode
+
+```
+roslaunch limo_gazebo_sim limo_ackerman.launch
+```
+
+​	Start rqt_robot_steering movement control plug-in, the sliding bar can control the robot motion
+
+```
+rosrun rqt_robot_steering rqt_robot_steering
+```
+
+![img](image/limo_ackerman.png) 
+
+Four-wheel differential steering movement mode
+
+```
+roslaunch limo_gazebo_sim limo_four_diff.launch 
+```
+
+Control by keyboard, the robot can be controlled to move forward, left, right and backward through "i", "j", "l",and "," on the keyboard
+
+```
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py 
+```
+
+![img](image/limo_diff.png) 
+
+ 
+
+ 
