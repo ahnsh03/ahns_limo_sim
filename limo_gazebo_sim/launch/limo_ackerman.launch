@@ -25,8 +25,8 @@
         robot_namespace:=$(arg robot_namespace)" />
 
     <!-- initial pose -->
-    <arg name="x" default="1.9"/>
-    <arg name="y" default="-2.185"/>
+    <arg name="x" default="2.08"/>
+    <arg name="y" default="-2.182"/>
     <arg name="z" default="0.0"/>
     <arg name="yaw" default="0.0"/>
 
