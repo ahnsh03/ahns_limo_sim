@@ -18,50 +18,50 @@
 
 ### Development Environment
 
-​	ubuntu 18.04 + [ROS Melodic desktop full](http://wiki.ros.org/melodic/Installation/Ubuntu)
+​	Ubuntu 20.04 + [ROS Noetic desktop full](http://wiki.ros.org/noetic/Installation/Ubuntu)
 
 ### Download and install required function package
 
 ​	Download and install ros-control function package, ros-control is the robot control middleware provided by ROS
 
 ```
-sudo apt-get install ros-melodic-ros-control
+sudo apt-get install ros-noetic-ros-control
 ```
 
 ​	Download and install ros-controllers function package, ros-controllers are the kinematics plug-in of common models provided by ROS
 
 ```
-sudo apt-get install ros-melodic-ros-controllers
+sudo apt-get install ros-noetic-ros-controllers
 ```
 
 ​	Download and install gazebo-ros function package, gazebo-ros is the communication interface between gazebo and ROS, and connect the ROS and Gazebo
 
 ```
-sudo apt-get install ros-melodic-gazebo-ros
+sudo apt-get install ros-noetic-gazebo-ros
 ```
 
 ​	Download and install gazebo-ros-control function package, gazebo-ros-control is the communication standard controller between ROS and Gazebo
 
 ```
-sudo apt-get install ros-melodic-gazebo-ros-control
+sudo apt-get install ros-noetic-gazebo-ros-control
 ```
 
 ​	Download and install joint-state-publisher-gui package.This package is used to visualize the joint control.
 
 ```
-sudo apt-get install ros-melodic-joint-state-publisher-gui 
+sudo apt-get install ros-noetic-joint-state-publisher-gui 
 ```
 
 ​	Download and install rqt-robot-steering plug-in, rqt_robot_steering is a ROS tool closely related to robot motion control, it can send the control command of robot linear motion and steering motion, and the robot motion can be easily controlled through the sliding bar
 
 ```
-sudo apt-get install ros-melodic-rqt-robot-steering 
+sudo apt-get install ros-noetic-rqt-robot-steering
 ```
 
 ​	Download and install teleop-twist-keyboard function package, telop-twist-keyboard is keyboard control function package, the robot can be controlled to move forward, left, right and backward through "i", "j", "l",and "," on the keyboard
 
 ```
-sudo apt-get install ros-melodic-teleop-twist-keyboard 
+sudo apt-get install ros-noetic-teleop-twist-keyboard 
 ```
 
 
@@ -102,7 +102,7 @@ catkin_init_workspace
 ​		Download simulation model function package
 
 ```
-git clone https://github.com/agilexrobotics/ugv_sim.git
+git clone https://github.com/ahnsh03/ahns_limo_sim.git
 ```
 
 ​		Enter the limo_ws folder
