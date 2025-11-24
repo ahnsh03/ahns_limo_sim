@@ -2,7 +2,7 @@
 
 <robot name="limo_ackerman" xmlns:xacro="http://ros.org/wiki/xacro">
 
-    <xacro:arg name="robot_namespace" default="/" />
+    <xacro:arg name="robot_namespace" default="" />
     <xacro:include filename="$(find limo_description)/urdf/limo_xacro.xacro" />
     <xacro:include filename="$(find limo_description)/urdf/limo_steering_hinge.xacro" />
     <xacro:include filename="$(find limo_description)/urdf/limo_ackerman.gazebo" />

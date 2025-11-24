@@ -442,19 +442,26 @@ void GazeboRosAckermanDrive::PublishOdometry(double step_time) {
     ignition::math::Pose3d pose = this->parent->GetWorldPose().Ign();
 #endif
 
+    // Gazebo returns pose of base_footprint (root link in URDF)
+    // We need base_link pose, which is 0.15m above base_footprint
+    // Adjust z position to convert base_footprint pose to base_link pose
+    double base_link_z_offset = 0.15;
+    
     tf::Quaternion qt(pose.Rot().X(), pose.Rot().Y(), pose.Rot().Z(), pose.Rot().W());
-    tf::Vector3 vt(pose.Pos().X(), pose.Pos().Y(), pose.Pos().Z());
+    tf::Vector3 vt(pose.Pos().X(), pose.Pos().Y(), pose.Pos().Z() + base_link_z_offset);
 
-    tf::Transform base_footprint_to_odom(qt, vt);
+    tf::Transform base_link_to_odom(qt, vt);
     if (this->broadcast_tf_) {
-        transform_broadcaster_->sendTransform(tf::StampedTransform(base_footprint_to_odom,
+        transform_broadcaster_->sendTransform(tf::StampedTransform(base_link_to_odom,
                                                                    current_time, odom_frame,
                                                                    base_footprint_frame));
     }
 
     // publish odom topic
+    // base_link position (base_footprint position + 0.15m offset)
     odom_.pose.pose.position.x = pose.Pos().X();
     odom_.pose.pose.position.y = pose.Pos().Y();
+    odom_.pose.pose.position.z = pose.Pos().Z() + base_link_z_offset;
 
     odom_.pose.pose.orientation.x = pose.Rot().X();
     odom_.pose.pose.orientation.y = pose.Rot().Y();

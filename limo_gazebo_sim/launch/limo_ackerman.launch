@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-    <arg name="robot_namespace" default="/"/>
+    <arg name="robot_namespace" default=""/>
     <arg name="world_name" default="$(find limo_gazebo_sim)/worlds/limo_track_obstacle.world"/>
 
     <!-- GUI / RViz 실행 여부 -->
@@ -48,6 +48,18 @@
                                 limo_fl_steering_hinge_controller limo_fr_steering_hinge_controller"/>
     
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    
+    <!-- base_link → base_footprint static TF (URDF의 base_joint와 역방향, RViz 에러 방지용) -->
+    <!-- base_footprint는 base_link 기준으로 0.15m 아래에 위치 -->
+    <node pkg="tf" type="static_transform_publisher" name="base_link_to_base_footprint" 
+          args="0.0 0.0 -0.15 0.0 0.0 0.0 /base_link /base_footprint 100" />
+
+    <!-- IMU 데이터를 실제 LIMO 형식과 동일하게 정규화 -->
+    <node pkg="limo_gazebo_sim" type="imu_orientation_adapter.py" name="imu_orientation_adapter" output="screen">
+        <param name="input_topic" value="/imu_raw"/>
+        <param name="output_topic" value="/imu"/>
+        <param name="frame_id" value="imu_link"/>
+    </node>
 
     <!-- RViz 실행 (선택적) -->
     <group if="$(arg rviz)">
