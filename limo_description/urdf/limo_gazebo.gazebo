@@ -37,7 +37,7 @@
               <ray>
                 <scan>
                   <horizontal>
-                    <samples>720</samples>
+                    <samples>378</samples>
                     <resolution>1</resolution>
                     <min_angle>-1.57079633</min_angle>
                     <max_angle>1.57079633</max_angle>
@@ -123,7 +123,7 @@
           <visualize>true</visualize>
           <topic>__default_topic__</topic>
           <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
-            <topicName>/limo/imu</topicName>
+            <topicName>/imu</topicName>
             <bodyName>${frame_prefix}_link</bodyName>
             <updateRateHZ>100.0</updateRateHZ>
             <gaussianNoise>0.001</gaussianNoise>

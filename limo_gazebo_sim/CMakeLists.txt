@@ -35,8 +35,9 @@ LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
 )
 
-catkin_install_python(PROGRAMS
-  scripts/imu_orientation_adapter.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
+# IMU adapter는 더 이상 사용하지 않음 (Gazebo가 직접 /imu 토픽 발행)
+# catkin_install_python(PROGRAMS
+#   scripts/imu_orientation_adapter.py
+#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+# )
 
